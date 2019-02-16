@@ -1,9 +1,11 @@
 import React from 'react';
 import {
 	AppBar,
+	Avatar,
+	SvgIcon,
 	Toolbar,
 	Typography
-} from '@material-ui/core'
+} from '@material-ui/core';
 
 const Header = props => (
 	<header>

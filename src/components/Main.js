@@ -13,7 +13,10 @@ import {
 	Typography,
 	withWidth
 } from '@material-ui/core';
-import SaveIcon from '@material-ui/icons/Save';
+import { 
+	ThumbUp,
+	ThumbDown
+} from '@material-ui/icons';
 
 const styles = theme => ({
 	root: {
@@ -23,11 +26,11 @@ const styles = theme => ({
 		height: '100%',
 		margin: theme.spacing.unit * 2
 	},
-})
-
-const moreStyles = ({
-	grow: {
+	jokeContainer: {
+		display: 'flex',
 		flexGrow: 1,
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 })
 
@@ -36,23 +39,37 @@ const Main = ({ classes }) => {
 		<Fragment>
 			<Toolbar />
 			<Card classes={{ root: classes.root }}>
-				<CardContent style={moreStyles.grow}>
+				<CardContent className={classes.jokeContainer}>
+					<Typography>joke</Typography>
 				</CardContent>
 				<CardContent>
 					<Grid container spacing={16} direction="row" justify="center" alignItems="center">
 						<Grid item>
 							<Button variant="contained" size="large" color="secondary">generate dad joke</Button>
 						</Grid>
+
 						<Hidden smDown>
-							<Grid item style={moreStyles.grow}>
+							<Grid item style={{ flexGrow: 1 }}>
 								<Typography align="right">Good one! Save it!</Typography>	
 							</Grid>
 						</Hidden>
 						<Grid item>
 							<Fab>
-								<SaveIcon />
+								<ThumbUp />
 							</Fab>
 						</Grid>
+						
+						<Grid item>
+							<Fab>
+								<ThumbDown />
+							</Fab>
+						</Grid>
+						<Hidden smDown>
+							<Grid item>
+								<Typography align="right">Try again, dad.</Typography>	
+							</Grid>
+						</Hidden>
+
 					</Grid>
 				</CardContent>
 			</Card>
