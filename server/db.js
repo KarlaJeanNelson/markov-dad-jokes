@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const axios = require('axios');
 const Joke = require('./joke.model');
-const Markov = require('markov-strings')
+const MarkovChain = require('./markov-chain-js');
 
 // If a mongoDB is specified in env config, use it.
 // Otherwise, use local mongodb.
@@ -12,8 +12,9 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true });
 
 mongoose.connection.on('connected', () => {
 	console.log(`Connected to database ${mongoURI}.`)
+	getStringData();
 })
-.then(() => getData())
+// .then(() => getStringData())
 .catch(e => console.log(`Error with mongoose connection.`, e))
 
 
@@ -21,10 +22,8 @@ mongoose.connection.on('error', (err) => {
 	console.log(`Mongo connection error.`, err)
 })
 
-const tokens = [];
-
-const getData = (page = 1, jokeData = [], order = 2) => {
-	// console.log(page);
+const getStringData = (page = 1, jokeData = []) => {
+	console.log(page);
 	const config = {
 		headers: {
 			'Accept': 'application/json',
@@ -39,29 +38,10 @@ const getData = (page = 1, jokeData = [], order = 2) => {
 	.then(({data}) => {
 		const retrievedJokes = jokeData.concat(data.results)
 		if (data.current_page === data.total_pages) {
-			// const errors = [];
-			// const updates = [];
-			const jokeSeeds = [];
-			const text = retrievedJokes[0].joke.split(' ');
-			const lookupTable = []
-			// console.log(text);
-			for (let i = 0; i <= text.length - order; i++) {
-				let gram = text.slice(i, i + order)
-				if (i === 0) {
-					jokeSeeds.push(gram)
-				}
-				
-				if (i === text.length - order) {
-					lookupTable[gram] = 'END'
-				} else {
-					lookupTable[gram] = text[i + order]
-				}
-			}
-			console.log(lookupTable, jokeSeeds );
-			const jokeStart = jokeSeeds[random(jokeSeeds.length - 1)];
-			console.log(Object.keys(lookupTable))
-			console.log(lookupTable[jokeStart]);
-			console.log(getNext(lookupTable, jokeStart));
+			let jokeString = ''
+			retrievedJokes.forEach(item => jokeString += item.joke.toString())
+			return jokeString;
+
 			// retrievedJokes.forEach(item => {
 			// 	const { joke } = item;
 			// 	console.log(joke);
@@ -72,14 +52,17 @@ const getData = (page = 1, jokeData = [], order = 2) => {
 			// console.log(`${updates.length} updates, ${errors.length} errors.`);
 		} else {
 			page++;
-			getData(page, retrievedJokes);
+			return getStringData(page, retrievedJokes);
 		}
 	})
+	.then(results => console.log(newJoke(results)))
 	.catch(e => console.log(`getData error page ${page}`, e))
 }
 
-const random = maxNum => (Math.floor(Math.random() * maxNum));
-
-const getNext = (lookupTable, current, sentence = []) => {
-	lookupTable.filter(item => Object.keys(item) === current)
+const newJoke = (source, order = 8) => {
+	console.log(source, order);
+	
+	let myGenerator = new MarkovChain({source, order})
+	
+	return myGenerator.generate() // Outputs e.g: 'Sed nibh element libero'
 }
