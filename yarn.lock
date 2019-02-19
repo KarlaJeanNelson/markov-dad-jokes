@@ -1977,7 +1977,7 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
 
-body-parser@1.18.3:
+body-parser@1.18.3, body-parser@^1.18.3:
   version "1.18.3"
   resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.3.tgz#5b292198ffdd553b3a0f20ded0592b956955c8b4"
   integrity sha1-WykhmP/dVTs6DyDe0FkrlWlVyLQ=
@@ -6388,6 +6388,13 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+markov-strings@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/markov-strings/-/markov-strings-2.0.2.tgz#5c20afa5530b408cfdec6dfc06d67c57fb90b9d3"
+  integrity sha512-21UmgQpdVUztX9AD5VY6F+m1E4HtVPbIojODFNgX15pk0A1l2oaNET3bZXWOi0IOxZUHts/cU51oA/5tfN05WA==
+  dependencies:
+    lodash "^4.17.11"
 
 math-random@^1.0.1:
   version "1.0.1"

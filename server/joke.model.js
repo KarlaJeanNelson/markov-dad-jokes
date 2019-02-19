@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const jokeSchema = new Schema({
 	id: String,
-	joke: String
+	joke: String,
 	},
 	{ timestamps: true, strict: false }
 );
