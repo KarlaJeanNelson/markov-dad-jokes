@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Joke = require('./joke.model');
 
-// POST route
+// joke POST route
 router.put('/', (req, res) => {
 	const { payload } = req.body;
 	const updates = [];
@@ -16,7 +16,7 @@ router.put('/', (req, res) => {
 	res.json({ success: errors.length > 0, message: `${updates.length} updates, ${errors.length} errors` });
 })
 
-// GET route
+// joke GET route
 router.get('/', (req, res) => {
 	// console.log(`in get router`);
 	Joke.find({}, (err, docs) => {
@@ -24,5 +24,10 @@ router.get('/', (req, res) => {
 		return err ? res.json({ success: false, error: err }) : res.send(docs)
 	})
 });
+
+// tuple GET route
+router.get('/tuples/:order', (req, res) => {
+	
+})
 
 module.exports = router;
