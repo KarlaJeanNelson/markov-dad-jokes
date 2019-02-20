@@ -22,7 +22,9 @@ mongoose.connection.on('error', (err) => {
 })
 
 const jokeSeeds = [];
-const myArr = [];
+const lookupTable = [];
+const order = 3;
+
 const saveData = (page = 1, jokeData = []) => {
 	// console.log(page);
 	const config = {
@@ -43,7 +45,7 @@ const saveData = (page = 1, jokeData = []) => {
 				const { joke } = item;
 				// console.log(joke);
 				Joke.findOneAndUpdate({ id: item.id }, { joke }, { upsert: true })
-				.then(result => getTuples(result.joke))
+				.then(result => testTupleGen(result.joke))
 				.catch(e => console.log(e))
 			})
 			// console.log(`${updates.length} updates, ${errors.length} errors.`);
@@ -62,62 +64,73 @@ const checkForData = () => {
 			saveData();
 		}
 	})
-	
-	Joke.findOne({})
-	.then(result => testTupleGen(result))
+	.then(getTuples())
 }
 
-const getTuples = (joke, order = 3) => {
-	Joke.findOne({})
-	// .then(result => console.log(result))
+const testTuples = () => {
+	// console.log(`in testTuples`);
+	Joke.findOne({}, (err, doc) => {
+		return err ? ({success: false, error: err}) : doc
+	})
+	.then(doc => tupleGen(doc))
+	.catch(e => console.log(e))
 }
 
-const testTupleGen = (jokeDoc) => {
-	console.log(`in testTupleGen`);
+const getTuples = () => {
+	// console.log(`in getTuples`);
+	Joke.find({}, (err, docArr) => {
+		return err ? ({ success: false, error: err }) : docArr
+	})
+	.then(docArr => docArr.forEach(doc => tupleGen(doc)))
+	.catch(e => console.log(e))
+}
+
+const tupleGen = (jokeDoc) => {
+	// console.log(`in tupleGen`);
 	const { joke } = jokeDoc;
 	let text = joke.replace(/[^\w\s]|_/g, $1 => ' ' + $1).replace(/[ ]+/g, ' ').split(' ');
 	// console.log(text);
 	const myLookupTable = getLookupTable(text)
-	console.log(`lookupTable:`, myLookupTable);
+	// console.log(`lookupTable:`, myLookupTable);
 	let seed = jokeSeeds[random(jokeSeeds.length - 1)];
 	// seed = seed.join(' ')
-	console.log(`seed:`, seed);
+	// console.log(`seed:`, seed);
 	getNextWord(seed, myLookupTable);
 }
 
-const getLookupTable = (text, order = 2) => {
-	console.log(text);
+const getLookupTable = (text) => {
+	// console.log(text);
 	for (let i = 0; i <= text.length - order; i++) {
 		let gram = text.slice(i, i + order);
 		if (i === 0) {
 			jokeSeeds.push(gram)
-			console.log(`jokeSeeds:`, jokeSeeds);
+			// console.log(`jokeSeeds:`, jokeSeeds);
 		}
 		
 		let nextWd = i === text.length - order ? 'THE_END' : text[i + order]
-		myArr.push({gram: gram.join(' '), nextWd})
+		lookupTable.push({gram: gram.join(' '), nextWd})
 	}
-	return myArr;
+	return lookupTable;
 }
 
-const getNextWord = (input, myLookupTable, order = 2) => {
-	console.log(`input:`, input);
+const getNextWord = (input, myLookupTable) => {
+	// console.log(`input:`, input);
 	const prevGram = []
 	for (let i = order; i > 0; i--) {
-		console.log(input[input.length - i]);
+		// console.log(input[input.length - i]);
 		prevGram.push(input[input.length - i])
 	}
-	console.log(`prevGram:`, prevGram);
+	// console.log(`prevGram:`, prevGram);
 	const options = myLookupTable.filter(item => item.gram === prevGram.join(' '))
 	let getNext = options[random(options.length - 1)]
 	getNext = getNext.nextWd
-	console.log(`getNext:`, getNext);
+	// console.log(`getNext:`, getNext);
 	if (getNext === 'THE_END') {
 		console.log(`joke:`, input.join(' '));
 		return input;
 	} else {
 		input.push(getNext);
-		getNextWord(input, myLookupTable, order)
+		getNextWord(input, myLookupTable)
 	}
 }
 
