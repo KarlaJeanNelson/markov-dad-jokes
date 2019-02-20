@@ -21,8 +21,8 @@ mongoose.connection.on('error', (err) => {
 	console.log(`Mongo connection error.`, err)
 })
 
-const lookupTable = new Map();
 const jokeSeeds = [];
+const myArr = [];
 const saveData = (page = 1, jokeData = []) => {
 	// console.log(page);
 	const config = {
@@ -80,42 +80,45 @@ const testTupleGen = (jokeDoc) => {
 	const myLookupTable = getLookupTable(text)
 	console.log(`lookupTable:`, myLookupTable);
 	let seed = jokeSeeds[random(jokeSeeds.length - 1)];
-	seed = seed.join(' ')
+	// seed = seed.join(' ')
 	console.log(`seed:`, seed);
-	const options = myLookupTable.filter(item => item.gram === seed)
-	let getNext = options[random(options.length - 1)]
-	console.log(getNext.nextWd);
-	getNextWord(seed);
+	getNextWord(seed, myLookupTable);
 }
 
 const getLookupTable = (text, order = 2) => {
 	console.log(text);
-	const myArr = [];
 	for (let i = 0; i <= text.length - order; i++) {
 		let gram = text.slice(i, i + order);
-		let nextWd = 'END';
 		if (i === 0) {
 			jokeSeeds.push(gram)
 			console.log(`jokeSeeds:`, jokeSeeds);
 		}
 		
-		if (i === text.length - order) {
-			lookupTable.set(gram, 'END')
-		} else {
-			nextWd = text[i + order]
-			lookupTable.set(gram, text[i + order])
-		}
+		let nextWd = i === text.length - order ? 'THE_END' : text[i + order]
 		myArr.push({gram: gram.join(' '), nextWd})
 	}
 	return myArr;
 }
 
-const getNextWord = input => {
+const getNextWord = (input, myLookupTable, order = 2) => {
 	console.log(`input:`, input);
+	const prevGram = []
+	for (let i = order; i > 0; i--) {
+		console.log(input[input.length - i]);
+		prevGram.push(input[input.length - i])
+	}
+	console.log(`prevGram:`, prevGram);
+	const options = myLookupTable.filter(item => item.gram === prevGram.join(' '))
+	let getNext = options[random(options.length - 1)]
+	getNext = getNext.nextWd
+	console.log(`getNext:`, getNext);
+	if (getNext === 'THE_END') {
+		console.log(`joke:`, input.join(' '));
+		return input;
+	} else {
+		input.push(getNext);
+		getNextWord(input, myLookupTable, order)
+	}
 }
 
-const random = maxNum => (Math.floor(Math.random() * maxNum));
-
-const getNext = (lookupTable, current, sentence = []) => {
-	lookupTable.filter(item => Object.keys(item) === current)
-}
+const random = maxNum => (Math.floor(Math.random() * (maxNum + 1)));
