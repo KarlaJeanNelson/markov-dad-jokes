@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Joke = require('./joke.model');
+const getLookupTable = require('./markov')
 
 // joke POST route
 router.put('/', (req, res) => {
@@ -27,7 +28,14 @@ router.get('/', (req, res) => {
 
 // tuple GET route
 router.get('/tuples/:order', (req, res) => {
-	
+	const { order } = req.params;
+	// console.log(`tuple get`, order);
+	Joke.find({}, (err, docArr) => {
+		return err ? ({ success: false, error: err }) : docArr
+	})
+	.then(results => getLookupTable(results, order))
+	.then(results => res.send(results))
+	.catch(e => res.json({ success: false, error: e }))
 })
 
 module.exports = router;
