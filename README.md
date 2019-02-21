@@ -10,7 +10,7 @@ To run locally, the following applications must be installed:
 - [Node.js](https://nodejs.org/)
 - [MongoDB](https://www.mongodb.com/download-center/community)
 
-### Local Instalation
+### Local Installation
 Follow these steps to dadjoke heaven:
 1. Clone this GitHub repo in the directory of your choice (`git clone https://github.com/KarlaJeanNelson/markov-dad-jokes.git` or `git clone git@github.com:KarlaJeanNelson/markov-dad-jokes.git`).
 2. Navigate into the cloned directory (`cd markov-dad-jokes`).
