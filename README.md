@@ -12,7 +12,7 @@ To run locally, the following applications must be installed:
 
 ### Local Installment
 Follow these steps to dadjoke heaven:
-1. Clone this GitHub repo in the directory of your choice (`git clone https://github.com/KarlaJeanNelson/markov-dad-jokes.git`).
+1. Clone this GitHub repo in the directory of your choice (`git clone https://github.com/KarlaJeanNelson/markov-dad-jokes.git` or `git clone git@github.com:KarlaJeanNelson/markov-dad-jokes.git`).
 2. Navigate into the cloned directory (`cd markov-dad-jokes`).
 3. Install dependencies (`npm install` or `yarn`).
 7. Almost there! Back in your terminal, type `npm run server` or `yarn run server` (depending on which package manager you used to install dependencies).
