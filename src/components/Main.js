@@ -104,7 +104,7 @@ class Main extends Component {
 		const { newJoke } = this.state;
 		axios.post('/api/jokes', { newJoke })
 		.then(({data}) => {
-			console.log(`post results`, data)
+			// console.log(`post results`, data)
 			this.setState({
 				...this.state,
 				thumbsUp: false
