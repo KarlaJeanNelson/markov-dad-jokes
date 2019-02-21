@@ -17,7 +17,7 @@ const getLookupTable = (docArr, orderStr) => {
 			lookupTable.push({gram: gram.join(' '), nextWd})
 		}
 	})
-	console.log(`lookupTable length`, lookupTable.length);
+	// console.log(`lookupTable length`, lookupTable.length);
 	return { lookupTable, jokeSeeds }
 }
 

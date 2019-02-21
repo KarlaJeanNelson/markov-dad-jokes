@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const axios = require('axios');
 const Joke = require('./joke.model');
 
-const jokeSeeds = [];
-const lookupTable = [];
-const order = 3;
-
 // If a mongoDB is specified in env config, use it.
 // Otherwise, use local mongodb.
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/dadjokes';
@@ -25,6 +21,7 @@ mongoose.connection.on('error', (err) => {
 	console.log(`Mongo connection error.`, err)
 })
 
+// Only get data if it is not there yet.
 const checkForData = () => {
 	Joke.countDocuments({}, (err, count) => {
 		console.log(count);

@@ -44,6 +44,7 @@ class Main extends Component {
 		jokeSeeds: [],
 		newJoke: '',
 		order: 3,
+		thumbsUp: false
 	}
 
 	// Get tuples from server.
@@ -87,7 +88,9 @@ class Main extends Component {
 			let newJoke = input.join(' ');
 			newJoke = newJoke.replace(/\s+(\W)/g, "$1");
 			this.setState({
-				newJoke: newJoke
+				...this.state,
+				newJoke: newJoke,
+				thumbsUp: true
 			});
 			// console.log(this.state);
 			return input;
@@ -96,6 +99,23 @@ class Main extends Component {
 			this.getNextWord(input)
 		}
 	}
+
+	saveJoke = () => {
+		const { newJoke } = this.state;
+		axios.post('/api/jokes', { newJoke })
+		.then(({data}) => {
+			console.log(`post results`, data)
+			this.setState({
+				...this.state,
+				thumbsUp: false
+			})
+			const promptForNew = window.confirm('Joke saved. Get new joke?');
+			if (promptForNew) {
+				this.getJoke();
+			}
+		})
+		.catch(e => console.log(`error with post`, e))
+	}
 	
 	componentDidMount() {
 		this.getTuples();
@@ -103,7 +123,7 @@ class Main extends Component {
 
   render() {
 		const { classes } = this.props;
-		const { lookupTable, jokeSeeds, newJoke } = this.state;
+		const { lookupTable, jokeSeeds, newJoke, thumbsUp } = this.state;
     return (
 			<Fragment>
 				<Toolbar />
@@ -119,7 +139,7 @@ class Main extends Component {
 									size="large"
 									color="secondary"
 									disabled={!lookupTable.length > 0 && !jokeSeeds.length > 0}
-									onClick={e => this.getJoke(e)}
+									onClick={this.getJoke}
 								>
 									generate dad joke
 								</Button>
@@ -131,13 +151,16 @@ class Main extends Component {
 								</Grid>
 							</Hidden>
 							<Grid item>
-								<Fab>
+								<Fab
+									disabled={!thumbsUp}
+									onClick={this.saveJoke}
+								>
 									<ThumbUp />
 								</Fab>
 							</Grid>
 							
 							<Grid item>
-								<Fab>
+								<Fab disabled={newJoke.length === 0} onClick={this.getJoke}>
 									<ThumbDown />
 								</Fab>
 							</Grid>
