@@ -2,7 +2,8 @@
   "name": "markov-dad-jokes",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
+	"proxy": "http://localhost:5000",
+	"homepage": "https://evening-thicket-17259.herokuapp.com/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
@@ -11,8 +12,6 @@
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
-    "markov-chain-js": "^1.0.2",
-    "markov-strings": "^2.0.2",
     "mongoose": "^5.4.12",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
