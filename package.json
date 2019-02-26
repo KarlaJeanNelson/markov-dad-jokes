@@ -2,8 +2,8 @@
   "name": "markov-dad-jokes",
   "version": "0.1.0",
   "private": true,
-	"proxy": "http://localhost:5000",
-	"heroku-run-build-script": true,
+  "proxy": "http://localhost:5000",
+  "heroku-run-build-script": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
@@ -20,6 +20,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.5",
     "recompose": "^0.30.0",
+    "typeface-karla": "^0.0.54",
     "typeface-roboto": "^0.0.54"
   },
   "scripts": {

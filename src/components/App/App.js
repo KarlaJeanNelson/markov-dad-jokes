@@ -3,6 +3,7 @@ import { CssBaseline } from '@material-ui/core';
 
 import Header from '../Header';
 import Main from '../Main';
+import Footer from '../Footer';
 
 const divStyle = ({
 	display: 'flex',
@@ -16,6 +17,7 @@ const App = () => (
 		<CssBaseline />
 		<Header />
 		<Main />
+		<Footer />
 	</div>
 )
 

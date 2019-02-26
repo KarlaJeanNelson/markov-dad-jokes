@@ -20,7 +20,7 @@ import {
 } from '@material-ui/icons';
 
 const styles = theme => ({
-	root: {
+	card: {
 		display: 'flex',
 		flexDirection: 'column',
 		flexGrow: 1,
@@ -127,7 +127,7 @@ class Main extends Component {
     return (
 			<Fragment>
 				<Toolbar />
-				<Card classes={{ root: classes.root }}>
+				<Card classes={{ root: classes.card }}>
 					<CardContent className={classes.jokeContainer}>
 						<Typography variant="h4" align="center">{newJoke}</Typography>
 					</CardContent>

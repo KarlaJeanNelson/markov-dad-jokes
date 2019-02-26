@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { MuiThemeProvider} from '@material-ui/core/styles';
 import theme from './components/App/theme';
 import 'typeface-roboto';
+// import 'typeface-karla';
 import App from './components/App/App';
 // import * as serviceWorker from './serviceWorker';
 

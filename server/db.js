@@ -24,7 +24,7 @@ mongoose.connection.on('error', (err) => {
 // Only get data if it is not there yet.
 const checkForData = () => {
 	Joke.countDocuments({}, (err, count) => {
-		console.log(count);
+		console.log(`${count} jokes saved in database.`);
 		if (count < 500) {
 			saveData();
 		}
