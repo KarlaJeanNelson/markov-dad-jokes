@@ -6389,18 +6389,6 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-markov-chain-js@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/markov-chain-js/-/markov-chain-js-1.0.2.tgz#477cc42640a69c2595a3ea9958315d54e199f858"
-  integrity sha512-0ryfqIfICDDZFTOynRrWrJ6Ssk79n/mtkjs/VSwckJZUJ9EJY597Gp1slXNFmeGq++HapJAo7SYAG3OMziN2Cg==
-
-markov-strings@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/markov-strings/-/markov-strings-2.0.2.tgz#5c20afa5530b408cfdec6dfc06d67c57fb90b9d3"
-  integrity sha512-21UmgQpdVUztX9AD5VY6F+m1E4HtVPbIojODFNgX15pk0A1l2oaNET3bZXWOi0IOxZUHts/cU51oA/5tfN05WA==
-  dependencies:
-    lodash "^4.17.11"
-
 math-random@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/math-random/-/math-random-1.0.1.tgz#8b3aac588b8a66e4975e3cdea67f7bb329601fac"
@@ -10003,6 +9991,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typeface-karla@^0.0.54:
+  version "0.0.54"
+  resolved "https://registry.yarnpkg.com/typeface-karla/-/typeface-karla-0.0.54.tgz#f59d09b329a378db2161a3ecd6e6a0054699b579"
+  integrity sha512-8LI3n3KGAF94hvnozruF5oEu00YnVgkTjFDESs47S6Z6WeTEvyxLnoR9Dlv7IW48rqZekLMgYhfgkfxkKpYAEQ==
 
 typeface-roboto@^0.0.54:
   version "0.0.54"

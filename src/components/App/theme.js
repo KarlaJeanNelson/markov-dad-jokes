@@ -18,9 +18,9 @@ const theme = createMuiTheme({
 	},
   palette: {
     primary: {
-			light: '#b0e0e6',
-			main: '#70B8C2',
-			dark: '#007180'
+			light: '#d8f0f3',
+			main: '#b0e0e6',
+			dark: '#318f9b'
 		},
 		secondary: {
 			main: '#000000',
@@ -30,6 +30,11 @@ const theme = createMuiTheme({
 		},
 	},
 	typography: {
+		caption: {
+			lineHeight: 1,
+			letterSpacing: "0em",
+		},
+		fontWeightBold: 600,
 		useNextVariants: true,
 	},
 	shape: {
